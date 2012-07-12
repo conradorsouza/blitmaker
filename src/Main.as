@@ -28,12 +28,10 @@ package
 			
 			_blitMaker = new BlitMaker(50);
 			_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
-			_blitMaker.loadSpriteCheet("button.png");
-			_blitMaker.loadSpriteCheetData("button.xml");		
+			_blitMaker.loadSpriteSheet("button.png");
+			_blitMaker.loadSpriteSheetData("button.xml");		
 			
 			stage.doubleClickEnabled = true
-			stage.addEventListener(MouseEvent.CLICK, pausa);
-			stage.addEventListener(MouseEvent.DOUBLE_CLICK, starta);
 				
 		}
 		

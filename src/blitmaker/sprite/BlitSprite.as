@@ -13,8 +13,8 @@ package blitmaker.sprite
 	 */
 	public class BlitSprite extends Sprite 
 	{
-		private var _spriteCheet:SpriteCheet;
-		private var _dataFile:SpriteCheetData;
+		private var _spriteSheet:SpriteSheet;
+		private var _dataFile:SpriteSheetData;
 		private var _currentFrame:uint;
 		private var _totalFrames:int;
 		private var _fps:uint = 24;
@@ -23,9 +23,9 @@ package blitmaker.sprite
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
-		public function BlitSprite(spriteCheet:SpriteCheet, dataFile:SpriteCheetData) 
+		public function BlitSprite(spriteSheet:SpriteSheet, dataFile:SpriteSheetData) 
 		{
-			this._spriteCheet = spriteCheet;
+			this._spriteSheet = spriteSheet;
 			this._dataFile = dataFile;
 			this._currentFrame = 0;
 			this._totalFrames = dataFile.frame.length;
@@ -62,7 +62,7 @@ package blitmaker.sprite
 				
 			var frame:Frame = this._dataFile.frame[dataIndex]
 			
-			var currentFrame:Bitmap = this._spriteCheet.readPixels(frame);
+			var currentFrame:Bitmap = this._spriteSheet.readPixels(frame);
 			this.addChild(currentFrame)
 			
 		}
