@@ -39,7 +39,7 @@ package blitmaker
 		
 		private function spriteLoaded(e:SpriteLoaderEvents):void 
 		{
-			_spriteSheet = new SpriteSheet(e.bitmapData)
+			_spriteSheet = new SpriteSheet(e.bitmap)
 			
 			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
 			

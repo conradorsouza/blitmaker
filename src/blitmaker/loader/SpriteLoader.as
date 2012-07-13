@@ -33,9 +33,8 @@ package blitmaker.loader
 		
 		private function spriteLoaded(e:Event):void 
 		{
-			var bitmap:Bitmap = e.target.content;
-			
-			dispatchEvent(new SpriteLoaderEvents(SpriteLoaderEvents.SPRITE_LOADED, bitmap.bitmapData));
+			var bitmap:Bitmap = e.target.content as Bitmap;			
+			dispatchEvent(new SpriteLoaderEvents(SpriteLoaderEvents.SPRITE_LOADED, bitmap));
 		}
 		
 	}

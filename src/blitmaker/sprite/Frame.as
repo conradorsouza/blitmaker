@@ -1,11 +1,14 @@
 package blitmaker.sprite 
 {
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Conrado Souza
 	 */
 	public class Frame extends Object
 	{
+		public var rect : Rectangle;
+		
 		private var _frameID:String;
 		private var _index:uint;
 		private var _x:Number;
@@ -44,10 +47,8 @@ package blitmaker.sprite
 		public function set width(value:Number):void { this._width = value; }
 		
 		public function set height(value:Number):void { this._height = value; }
-		
-		
+				
 		public function set frameID(value:String):void { this._frameID = value; }
-		
 	}
 
 }
