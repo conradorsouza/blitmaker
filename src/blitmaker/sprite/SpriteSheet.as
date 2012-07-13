@@ -13,23 +13,14 @@ package blitmaker.sprite
 	 */
 	public class SpriteSheet extends Object
 	{
-		private var _bitmapData:BitmapData;
+		private var _bitmap:Bitmap;
 		
-		public function SpriteSheet(bitmapData:BitmapData) 
+		public function SpriteSheet(bitmap:Bitmap) 
 		{
-			this._bitmapData = bitmapData;
+			this._bitmap = bitmap;
 		}
 		
-		public function readPixels(frame:Frame):Bitmap 
-		{
-
-			var data:BitmapData = new BitmapData(frame.width, frame.height, true);
-				data.copyPixels(this._bitmapData, new Rectangle(frame.x, frame.y, frame.width, frame.height), new Point(0, 0));
-							
-			return new Bitmap(data);;
-		}
-		
-		public function get bitmapData():BitmapData { return this._bitmapData; }
+		public function get bitmap():Bitmap { return this._bitmap; }
 		
 	}
 
