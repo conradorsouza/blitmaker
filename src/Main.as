@@ -18,14 +18,19 @@ package
 	 */
 	public class Main extends Sprite 
 	{
+		
+		[Embed(source="../bin/buildings.png")]
+		private const _buildingsImage:Class;
+		
+		[Embed(source="../bin/buildings.xml", mimeType="application/octet-stream")]
+		private const _buildingsXML:Class;
+		
+		
+		
 		private var _blitMaker:BlitMaker;
-		private var _blitSprite:BlitSprite;
+		private var _blitBuildingSprite:BlitSprite;
 		
-		[Embed(source="../bin/button.png")]
-		private const _buttonImage:Class;
 		
-		[Embed(source="../bin/button.xml", mimeType="application/octet-stream")]
-		private const _buttonXML:Class;
 		
 		public function Main():void 
 		{
@@ -61,23 +66,20 @@ package
 			
 
 			/** You can directly create a BlitSprite if you need.*/
-			var dataSheet:XML = XML(new _buttonXML());
-			var buttonSpriteSheet:Bitmap = new _buttonImage();
-			_blitSprite = new BlitSprite(buttonSpriteSheet, new SpriteSheetData(dataSheet), 30); 
+			var dataSheetBuildings:XML = XML(new _buildingsXML());
+			var buttonSpriteSheetBuildings:Bitmap = new _buildingsImage();
+			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, new SpriteSheetData(dataSheetBuildings), 30); 
 			
-			addChild(_blitSprite);
+			addChild(_blitBuildingSprite);
 			
+			_blitBuildingSprite.x = 300;
+			_blitBuildingSprite.y = 100;
 		}
-		
-		private function testFunction(e:MouseEvent):void 
-		{
-			
-		}
-		
+
 		private function addToStage(e:BlitMakerEvents):void 
 		{
-			_blitSprite = e.currentTarget.blitSprite
-			addChild(_blitSprite);
+			_blitBuildingSprite = e.currentTarget.blitSprite
+			addChild(_blitBuildingSprite);
 		}
 		
 	}
