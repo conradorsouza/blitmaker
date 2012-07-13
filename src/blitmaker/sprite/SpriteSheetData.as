@@ -1,5 +1,6 @@
 package blitmaker.sprite 
 {
+	import flash.geom.Rectangle;
 	/**
 	 * ...
 	 * @author Conrado Souza
@@ -24,6 +25,7 @@ package blitmaker.sprite
 					frame.y = this._data.SubTexture[i].@y;
 					frame.width = this._data.SubTexture[i].@width;
 					frame.height = this._data.SubTexture[i].@height;
+					frame.rect = new Rectangle( frame.x, frame.y, frame.width, frame.height );
 				
 				this._frame.push(frame);
 			}
