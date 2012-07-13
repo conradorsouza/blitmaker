@@ -8,23 +8,24 @@ package blitmaker.sprite
 	public class Frame extends Object
 	{
 		
-		private var _frameID:String;
-		private var _index:uint;
+		private var _rect : Rectangle;
 		private var _x:Number;
 		private var _y:Number;
+		private var _index:uint;
 		private var _width:Number;
 		private var _height:Number;
-		private var _rect : Rectangle;
+		private var _frameID:String;
+		private var _frameFunction:Function;
 		
-		public function Frame(index:uint = 0, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, frameID:String = "", rect:Rectangle=null) 
+		public function Frame() 
 		{
-			this._index = index;
-			this._x = x;
-			this._y = y;
-			this._rect = rect
-			this._width = width;
-			this._height = height;
-			this._frameID = frameID;
+			
+		}
+		
+		public function execFrameFunction():void 
+		{
+			if (this._frameFunction != null)
+				this._frameFunction();
 		}
 		
 		public function get index():uint { return this._index; }
@@ -54,6 +55,8 @@ package blitmaker.sprite
 		public function set frameID(value:String):void { this._frameID = value; }
 
 		public function set rect(value:Rectangle):void { this._rect = value; }
+		
+		public function set frameFunction(value:Function):void { this._frameFunction = value; }
 	}
 
 }

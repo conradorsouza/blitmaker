@@ -38,8 +38,10 @@ package blitmaker.sprite
 			this.addChild( spriteSheet );
 		}
 		
-		private function changeFrame(e:TimerEvent):void 
+		private function changeFrame(e:TimerEvent = null):void 
 		{
+			drawFrame(this._currentFrame);
+
 			if (this._currentFrame < this._totalFrames-1)
 			{
 				this._currentFrame += this._frameDirection;
@@ -49,13 +51,39 @@ package blitmaker.sprite
 				this._currentFrame = 0;
 			}
 			
-			drawFrame(this._currentFrame);			
+		}
+		
+		public function gotoAndStop(frameNumber:uint):void
+		{
+			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
+			
+			if(this._timer.running)
+				this._timer.stop();
+			
+			changeFrame();
+		}
+		
+		public function gotoAndPlay(frameNumber:uint):void
+		{
+			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
+			
+			if(!this._timer.running)
+				this._timer.start();
+				
+			changeFrame();
 		}
 		
 		private function drawFrame(dataIndex:uint):void 
 		{
 			var frame:Frame = this._dataFile.frame[dataIndex];
+				frame.execFrameFunction();
+				
 			this._spriteSheet.scrollRect = frame.rect;
+		}
+		
+		public function addFrameScript(frame:uint, method:Function):void
+		{
+			this._dataFile.frame[frame].frameFunction = method;
 		}
 		
 		public function stop():void
@@ -73,8 +101,7 @@ package blitmaker.sprite
 		public function set fps(value:uint):void 
 		{
 			this._fps = value;
-			_timer.delay = 1000 / value;
-		
+			this._timer.delay = 1000 / value;
 		}
 		
 		public function get currentFrame():uint { return this._currentFrame; }
