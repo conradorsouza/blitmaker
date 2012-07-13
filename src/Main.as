@@ -44,7 +44,6 @@ package
 			
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.addEventListener(MouseEvent.CLICK, testFunction);
 			/**Use this if you want to load external assets **/
 			//
 			//_blitMaker = new BlitMaker(30);
@@ -57,11 +56,11 @@ package
 			/** Use this if you want to use embeded assets **/
 			//
 			//_blitMaker = new BlitMaker(30);
-			//var dataSheet:XML = XML(new _buttonXML());
-			//var buttonSpriteSheet:Bitmap = new _buttonImage();
-			//_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
-			//_blitMaker.addSpriteSheet(buttonSpriteSheet);
-			//_blitMaker.addSpriteSheetData(dataSheet);
+			//var dataSheet:XML = XML(new _buildingsXML());
+			//var buttonSpriteSheet:Bitmap = new _buildingsImage();
+			//_blitBuildingSprite.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
+			//_blitBuildingSprite.addSpriteSheet(buttonSpriteSheet);
+			//_blitBuildingSprite.addSpriteSheetData(dataSheet);
 			
 			
 
