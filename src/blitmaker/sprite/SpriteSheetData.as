@@ -19,12 +19,12 @@ package blitmaker.sprite
 			for (var i:int = 0; i < this._length; i++) 
 			{
 				var frame:Frame = new Frame();
-					frame.index = i;
-					frame.frameID = this._data.SubTexture[i].@name;
 					frame.x = this._data.SubTexture[i].@x;
 					frame.y = this._data.SubTexture[i].@y;
+					frame.index = i;
 					frame.width = this._data.SubTexture[i].@width;
 					frame.height = this._data.SubTexture[i].@height;
+					frame.frameID = this._data.SubTexture[i].@name;
 					frame.rect = new Rectangle( frame.x, frame.y, frame.width, frame.height );
 				
 				this._frame.push(frame);

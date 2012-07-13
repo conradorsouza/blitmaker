@@ -1,9 +1,7 @@
 package blitmaker.sprite 
 {
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -13,29 +11,31 @@ package blitmaker.sprite
 	 */
 	public class BlitSprite extends Sprite 
 	{
-		private var _spriteSheet:SpriteSheet;
-		private var _dataFile:SpriteSheetData;
-		private var _currentFrame:uint;
-		private var _totalFrames:int;
 		private var _fps:uint = 24;
+		private var _dataFile:SpriteSheetData;
+		private var _totalFrames:int;
+		private var _spriteSheet:Bitmap;
+		private var _currentFrame:uint;
 		
 		
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
-		public function BlitSprite(spriteSheet:SpriteSheet, dataFile:SpriteSheetData, fps:uint = 24) 
+		public function BlitSprite(spriteSheet:Bitmap, dataFile:SpriteSheetData, fps:uint = 24) 
 		{
-			this._spriteSheet = spriteSheet;
-			this._dataFile = dataFile;
-			this._currentFrame = 0;
-			this._totalFrames = dataFile.frame.length;
 			this._fps = fps;
-			this._timer = new Timer(this._fps, 0);
+			this._dataFile = dataFile;
+			this._spriteSheet = spriteSheet;
+			this._totalFrames = dataFile.frame.length;
+			this._currentFrame = 0;
+
+			this._timer = new Timer(1000/this._fps, 0);
 			this._timer.addEventListener(TimerEvent.TIMER, changeFrame);
 			this._timer.start();			
 			
 			drawFrame(this._currentFrame);
-			this.addChild( spriteSheet.bitmap );
+
+			this.addChild( spriteSheet );
 		}
 		
 		private function changeFrame(e:TimerEvent):void 
@@ -55,17 +55,17 @@ package blitmaker.sprite
 		private function drawFrame(dataIndex:uint):void 
 		{
 			var frame:Frame = this._dataFile.frame[dataIndex];
-			_spriteSheet.bitmap.scrollRect = frame.rect;
+			this._spriteSheet.scrollRect = frame.rect;
 		}
 		
 		public function stop():void
 		{
-			_timer.stop();
+			this._timer.stop();
 		}
 		
 		public function play():void
 		{
-			_timer.start();
+			this._timer.start();
 		}
 		
 		public function get fps():uint { return this._fps; }
@@ -76,6 +76,8 @@ package blitmaker.sprite
 			_timer.delay = 1000 / value;
 		
 		}
+		
+		public function get currentFrame():uint { return this._currentFrame; }
 		
 	}
 

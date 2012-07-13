@@ -6,15 +6,9 @@ package blitmaker
 	import blitmaker.loader.SpriteDataSheetLoader;
 	import blitmaker.loader.SpriteLoader;
 	import blitmaker.sprite.BlitSprite;
-	import blitmaker.sprite.SpriteSheet;
 	import blitmaker.sprite.SpriteSheetData;
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.net.URLRequest;
 	/**
 	 * ...
 	 * @author Conrado Souza 
@@ -23,7 +17,7 @@ package blitmaker
 	{
 		private var _fps:uint = 24;
 		private var _blitSprite:BlitSprite;
-		private var _spriteSheet:SpriteSheet;
+		private var _spriteSheet:Bitmap;
 		private var _spriteSheetData:SpriteSheetData;
 		
 		public function BlitMaker(fps:uint) 
@@ -76,7 +70,7 @@ package blitmaker
 		
 		private function buildSpriteSheet(bitmap:Bitmap):void
 		{
-			_spriteSheet = new SpriteSheet(bitmap)
+			_spriteSheet = bitmap;
 			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
 			
 			buildContent();

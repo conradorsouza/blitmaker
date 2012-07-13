@@ -19,12 +19,12 @@ package blitmaker.sprite
 		public function Frame(index:uint = 0, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, frameID:String = "", rect:Rectangle=null) 
 		{
 			this._index = index;
-			this._frameID = frameID;
 			this._x = x;
 			this._y = y;
+			this._rect = rect
 			this._width = width;
 			this._height = height;
-			this._rect = rect
+			this._frameID = frameID;
 		}
 		
 		public function get index():uint { return this._index; }
@@ -40,6 +40,8 @@ package blitmaker.sprite
 		public function get height():Number { return this._height; }
 		
 		public function set index(value:uint):void { this._index = value; }
+
+		public function get rect():Rectangle { return this._rect; }
 		
 		public function set x(value:Number):void { this._x = value; }
 		
@@ -50,9 +52,7 @@ package blitmaker.sprite
 		public function set height(value:Number):void { this._height = value; }
 				
 		public function set frameID(value:String):void { this._frameID = value; }
-		
-		public function get rect():Rectangle { return this._rect; }
-		
+
 		public function set rect(value:Rectangle):void { this._rect = value; }
 	}
 
