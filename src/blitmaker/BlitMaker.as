@@ -8,6 +8,8 @@ package blitmaker
 	import blitmaker.sprite.BlitSprite;
 	import blitmaker.sprite.SpriteSheet;
 	import blitmaker.sprite.SpriteSheetData;
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.URLLoader;
@@ -55,6 +57,24 @@ package blitmaker
 				
 		}
 		
+		public function addSpriteSheet(buttonSpriteSheet:Bitmap):void 
+		{
+			_spriteSheet = new SpriteSheet(buttonSpriteSheet)
+			
+			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
+			
+			buildContent();
+		}
+		
+		public function addSpriteSheetData(dataSheet:XML):void 
+		{
+			_spriteSheetData = new SpriteSheetData(dataSheet)
+			
+			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITEDATA_LOADED));
+			
+			buildContent();
+		}
+		
 		private function spriteDataLoaded(e:SpriteDataSheetLoaderEvents):void 
 		{
 			_spriteSheetData = new SpriteSheetData(e.data)
@@ -69,7 +89,6 @@ package blitmaker
 		{
 			if (_spriteSheet && _spriteSheetData)
 			{
-				
 				this._blitSprite = new BlitSprite(_spriteSheet, _spriteSheetData);
 				this._blitSprite.fps = this._fps;
 				this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.BLIT_LOADED));
