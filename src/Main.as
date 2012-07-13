@@ -3,15 +3,14 @@ package
 	import blitmaker.BlitMaker;
 	import blitmaker.events.BlitMakerEvents;
 	import blitmaker.sprite.BlitSprite;
-	import blitmaker.sprite.SpriteSheet;
 	import blitmaker.sprite.SpriteSheetData;
 	import flash.display.Bitmap;
-	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
 	
 	/**
 	 * ...
@@ -42,33 +41,32 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.addEventListener(MouseEvent.CLICK, testFunction);
 			/**Use this if you want to load external assets **/
-			/*
-			_blitMaker = new BlitMaker(30);
-			_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
-			_blitMaker.loadSpriteSheet("http://conradorsouza.github.com/blitmaker/example/button.png");
-			_blitMaker.loadSpriteSheetData("http://conradorsouza.github.com/blitmaker/example/button.xml");	
-			*/
+			//
+			//_blitMaker = new BlitMaker(30);
+			//_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
+			//_blitMaker.loadSpriteSheet("http://conradorsouza.github.com/blitmaker/example/button.png");
+			//_blitMaker.loadSpriteSheetData("http://conradorsouza.github.com/blitmaker/example/button.xml");	
+			
 			
 			
 			/** Use this if you want to use embeded assets **/
-			/*
-			_blitMaker = new BlitMaker(30);
-			var dataSheet:XML = XML(new _buttonXML());
-			var buttonSpriteSheet:Bitmap = new _buttonImage();
-			_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
-			_blitMaker.addSpriteSheet(buttonSpriteSheet);
-			_blitMaker.addSpriteSheetData(dataSheet);
-			*/
+			//
+			//_blitMaker = new BlitMaker(30);
+			//var dataSheet:XML = XML(new _buttonXML());
+			//var buttonSpriteSheet:Bitmap = new _buttonImage();
+			//_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
+			//_blitMaker.addSpriteSheet(buttonSpriteSheet);
+			//_blitMaker.addSpriteSheetData(dataSheet);
+			
 			
 
 			/** You can directly create a BlitSprite if you need.*/
 			var dataSheet:XML = XML(new _buttonXML());
 			var buttonSpriteSheet:Bitmap = new _buttonImage();
-			_blitSprite = new BlitSprite(new SpriteSheet(buttonSpriteSheet), new SpriteSheetData(dataSheet), 30); 
+			_blitSprite = new BlitSprite(buttonSpriteSheet, new SpriteSheetData(dataSheet), 30); 
 			
 			addChild(_blitSprite);
 			
-				
 		}
 		
 		private function testFunction(e:MouseEvent):void 
