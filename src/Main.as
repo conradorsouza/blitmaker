@@ -40,7 +40,7 @@ package
 			
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			
+			stage.addEventListener(MouseEvent.CLICK, testFunction);
 			/**Use this if you want to load external assets **/
 			/*
 			_blitMaker = new BlitMaker(30);
@@ -69,6 +69,11 @@ package
 			addChild(_blitSprite);
 			
 				
+		}
+		
+		private function testFunction(e:MouseEvent):void 
+		{
+			
 		}
 		
 		private function addToStage(e:BlitMakerEvents):void 

@@ -68,16 +68,7 @@ package blitmaker.sprite
 			_timer.start();
 		}
 		
-		public function gotoAndPlay(frame:uint):void
-		{
-			if (!_timer.running)
-				_timer.start();
-			
-			drawFrame(frame);
-		}
-		
 		public function get fps():uint { return this._fps; }
-		
 		
 		public function set fps(value:uint):void 
 		{
