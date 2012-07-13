@@ -3,7 +3,10 @@ package
 	import blitmaker.BlitMaker;
 	import blitmaker.events.BlitMakerEvents;
 	import blitmaker.sprite.BlitSprite;
+	
 	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -25,6 +28,9 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			_blitMaker = new BlitMaker(50);
 			_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
