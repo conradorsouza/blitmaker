@@ -28,8 +28,8 @@ package
 			
 			_blitMaker = new BlitMaker(50);
 			_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
-			_blitMaker.loadSpriteSheet("button.png");
-			_blitMaker.loadSpriteSheetData("button.xml");		
+			_blitMaker.loadSpriteSheet("http://conradorsouza.github.com/blitmaker/example/button.png");
+			_blitMaker.loadSpriteSheetData("http://conradorsouza.github.com/blitmaker/example/button.xml");		
 			
 			stage.doubleClickEnabled = true
 				
