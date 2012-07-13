@@ -54,8 +54,6 @@ package
 			
 			_blitMaker.addSpriteSheet(buttonSpriteSheet);
 			_blitMaker.addSpriteSheetData(dataSheet);
-			
-			stage.doubleClickEnabled = true
 				
 		}
 		
