@@ -7,7 +7,6 @@ package blitmaker.sprite
 	 */
 	public class Frame extends Object
 	{
-		public var rect : Rectangle;
 		
 		private var _frameID:String;
 		private var _index:uint;
@@ -15,8 +14,9 @@ package blitmaker.sprite
 		private var _y:Number;
 		private var _width:Number;
 		private var _height:Number;
+		private var _rect : Rectangle;
 		
-		public function Frame(index:uint = 0, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, frameID:String = "") 
+		public function Frame(index:uint = 0, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, frameID:String = "", rect:Rectangle=null) 
 		{
 			this._index = index;
 			this._frameID = frameID;
@@ -24,6 +24,7 @@ package blitmaker.sprite
 			this._y = y;
 			this._width = width;
 			this._height = height;
+			this._rect = rect
 		}
 		
 		public function get index():uint { return this._index; }
@@ -49,6 +50,10 @@ package blitmaker.sprite
 		public function set height(value:Number):void { this._height = value; }
 				
 		public function set frameID(value:String):void { this._frameID = value; }
+		
+		public function get rect():Rectangle { return this._rect; }
+		
+		public function set rect(value:Rectangle):void { this._rect = value; }
 	}
 
 }

@@ -21,10 +21,10 @@ package blitmaker
 	 */
 	public class BlitMaker extends EventDispatcher
 	{
+		private var _fps:uint = 24;
 		private var _blitSprite:BlitSprite;
 		private var _spriteSheet:SpriteSheet;
 		private var _spriteSheetData:SpriteSheetData;
-		private var _fps:uint = 24;
 		
 		public function BlitMaker(fps:uint) 
 		{
@@ -39,50 +39,47 @@ package blitmaker
 				
 		}
 		
-		private function spriteLoaded(e:SpriteLoaderEvents):void 
-		{
-			_spriteSheet = new SpriteSheet(e.bitmap)
-			
-			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
-			
-			buildContent();
-			
-		}
-		
 		public function loadSpriteSheetData(path:String):void
 		{
 			var spriteDataLoader:SpriteDataSheetLoader = new SpriteDataSheetLoader();
 				spriteDataLoader.addEventListener(SpriteDataSheetLoaderEvents.DATA_LOADED, spriteDataLoaded);
 				spriteDataLoader.load(path);
-				
 		}
 		
-		public function addSpriteSheet(buttonSpriteSheet:Bitmap):void 
+		private function spriteLoaded(e:SpriteLoaderEvents):void 
 		{
-			_spriteSheet = new SpriteSheet(buttonSpriteSheet)
-			
-			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
-			
-			buildContent();
-		}
-		
-		public function addSpriteSheetData(dataSheet:XML):void 
-		{
-			_spriteSheetData = new SpriteSheetData(dataSheet)
-			
-			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITEDATA_LOADED));
-			
-			buildContent();
+			buildSpriteSheet(e.bitmap);
 		}
 		
 		private function spriteDataLoaded(e:SpriteDataSheetLoaderEvents):void 
 		{
-			_spriteSheetData = new SpriteSheetData(e.data)
-			
+			buildSpriteDataSheet(e.data);
+		}
+		
+		public function addSpriteSheet(buttonSpriteSheet:Bitmap):void 
+		{
+			buildSpriteSheet(buttonSpriteSheet);
+		}
+		
+		public function addSpriteSheetData(dataSheet:XML):void 
+		{
+			buildSpriteDataSheet(dataSheet);
+		}
+		
+		private function buildSpriteDataSheet(dataSheet:XML):void
+		{
+			_spriteSheetData = new SpriteSheetData(dataSheet)
 			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITEDATA_LOADED));
 			
 			buildContent();
+		}
+		
+		private function buildSpriteSheet(bitmap:Bitmap):void
+		{
+			_spriteSheet = new SpriteSheet(bitmap)
+			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
 			
+			buildContent();
 		}
 		
 		private function buildContent():void 

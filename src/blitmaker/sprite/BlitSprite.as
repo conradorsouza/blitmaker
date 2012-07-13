@@ -23,13 +23,13 @@ package blitmaker.sprite
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
-		public function BlitSprite(spriteSheet:SpriteSheet, dataFile:SpriteSheetData) 
+		public function BlitSprite(spriteSheet:SpriteSheet, dataFile:SpriteSheetData, fps:uint = 24) 
 		{
 			this._spriteSheet = spriteSheet;
 			this._dataFile = dataFile;
 			this._currentFrame = 0;
 			this._totalFrames = dataFile.frame.length;
-			
+			this._fps = fps;
 			this._timer = new Timer(this._fps, 0);
 			this._timer.addEventListener(TimerEvent.TIMER, changeFrame);
 			this._timer.start();			
@@ -66,6 +66,14 @@ package blitmaker.sprite
 		public function play():void
 		{
 			_timer.start();
+		}
+		
+		public function gotoAndPlay(frame:uint):void
+		{
+			if (!_timer.running)
+				_timer.start();
+			
+			drawFrame(frame);
 		}
 		
 		public function get fps():uint { return this._fps; }
