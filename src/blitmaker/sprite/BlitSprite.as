@@ -40,7 +40,6 @@ package blitmaker.sprite
 		private var _spriteSheet:Bitmap;
 		private var _currentFrame:uint;
 		
-		
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
@@ -67,10 +66,9 @@ package blitmaker.sprite
 			this._timer = new Timer(1000/this._fps, 0);
 			this._timer.addEventListener(TimerEvent.TIMER, changeFrame);
 			this._timer.start();			
-			
-			drawFrame(this._currentFrame);
 
 			this.addChild( this._spriteSheet );
+			drawFrame(this._currentFrame);
 		}
 		
 		private function changeFrame(e:TimerEvent = null):void 
@@ -119,7 +117,10 @@ package blitmaker.sprite
 			var frame:Frame = this._dataFile.frame[dataIndex];
 				frame.execFrameFunction();
 				
-			this.scrollRect = frame.rect;
+			this.width = frame.width;
+			this.height = frame.height;
+			
+			this._spriteSheet.scrollRect = frame.rect;
 		}
 		
 		/**
