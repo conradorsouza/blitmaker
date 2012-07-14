@@ -16,7 +16,7 @@ package
 	 * ...
 	 * @author Conrado Souza
 	 */
-	public class Main extends Sprite 
+	public class BlitMaker extends Sprite 
 	{
 		
 		[Embed(source="../bin/buildings.png")]
@@ -27,7 +27,7 @@ package
 
 		private var _blitBuildingSprite:BlitSprite;
 	
-		public function Main() 
+		public function BlitMaker() 
 		{
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
@@ -46,7 +46,7 @@ package
 			
 			addChild(_blitBuildingSprite);
 			
-			_blitBuildingSprite.x = 300;
+			_blitBuildingSprite.x = 100;
 			_blitBuildingSprite.y = 100;
 		}
 
