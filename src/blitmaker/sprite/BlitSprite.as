@@ -60,7 +60,7 @@ package blitmaker.sprite
 		{
 			this._fps = fps;
 			this._dataFile = new SpriteSheetData(dataFile);
-			this._spriteSheet = spriteSheet;
+			this._spriteSheet = new Bitmap(spriteSheet.bitmapData);
 			this._totalFrames = this._dataFile.frame.length;
 			this._currentFrame = 0;
 			
@@ -70,7 +70,7 @@ package blitmaker.sprite
 			
 			drawFrame(this._currentFrame);
 
-			this.addChild( spriteSheet );
+			this.addChild( this._spriteSheet );
 		}
 		
 		private function changeFrame(e:TimerEvent = null):void 
@@ -119,7 +119,7 @@ package blitmaker.sprite
 			var frame:Frame = this._dataFile.frame[dataIndex];
 				frame.execFrameFunction();
 				
-			this._spriteSheet.scrollRect = frame.rect;
+			this.scrollRect = frame.rect;
 		}
 		
 		/**
