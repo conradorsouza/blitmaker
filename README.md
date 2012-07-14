@@ -51,10 +51,10 @@ private function addToStage(e:BlitMakerEvents):void
 
 /** Use this if you want to use embeded assets **/
 
-_blitMaker = new BlitMaker(30);
+_blitMaker = new BlitCreator(30);
 var dataSheet:XML = XML(new _buttonXML());
 var buttonSpriteSheet:Bitmap = new _buttonImage();
-_blitMaker.addEventListener(BlitMakerEvents.BLIT_LOADED, addToStage);
+_blitMaker.addEventListener(BlitCreatorEvents.BLIT_LOADED, addToStage);
 _blitMaker.addSpriteSheet(buttonSpriteSheet);
 _blitMaker.addSpriteSheetData(dataSheet);
 
@@ -70,7 +70,7 @@ private function addToStage(e:BlitMakerEvents):void
 
 var dataSheet:XML = XML(new _buttonXML());
 var buttonSpriteSheet:Bitmap = new _buttonImage();
-_blitSprite = new BlitSprite(buttonSpriteSheet, new SpriteSheetData(dataSheet), 30); 
+_blitSprite = new BlitSprite(buttonSpriteSheet, dataSheet, 30); 
 
 
 

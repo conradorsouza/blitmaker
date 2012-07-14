@@ -44,14 +44,14 @@ package blitmaker.sprite
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
-		public function BlitSprite(spriteSheet:Bitmap, dataFile:SpriteSheetData, fps:uint = 24) 
+		public function BlitSprite(spriteSheet:Bitmap, dataFile:XML, fps:uint = 24) 
 		{
 			this._fps = fps;
-			this._dataFile = dataFile;
+			this._dataFile = new SpriteSheetData(dataFile);
 			this._spriteSheet = spriteSheet;
-			this._totalFrames = dataFile.frame.length;
+			this._totalFrames = this._dataFile.frame.length;
 			this._currentFrame = 0;
-
+			
 			this._timer = new Timer(1000/this._fps, 0);
 			this._timer.addEventListener(TimerEvent.TIMER, changeFrame);
 			this._timer.start();			

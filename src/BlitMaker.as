@@ -23,10 +23,11 @@
 
 package 
 {
-	import blitmaker.BlitMaker;
-	import blitmaker.events.BlitMakerEvents;
+	import blitmaker.BlitCreator;
+	import blitmaker.events.BlitCreatorEvents;
 	import blitmaker.sprite.BlitSprite;
 	import blitmaker.sprite.SpriteSheetData;
+	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -65,7 +66,7 @@ package
 
 			var dataSheetBuildings:XML = XML(new _buildingsXML());
 			var buttonSpriteSheetBuildings:Bitmap = new _buildingsImage();
-			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, new SpriteSheetData(dataSheetBuildings), 30); 
+			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, dataSheetBuildings, 30); 
 			
 			addChild(_blitBuildingSprite);
 			
