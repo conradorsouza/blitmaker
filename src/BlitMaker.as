@@ -23,17 +23,13 @@
 
 package 
 {
-	import blitmaker.BlitCreator;
-	import blitmaker.events.BlitCreatorEvents;
 	import blitmaker.sprite.BlitSprite;
-	import blitmaker.sprite.SpriteSheetData;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	
 	
 	/**

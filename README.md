@@ -73,6 +73,7 @@ private function addToStage(e:BlitMakerEvents):void
 var dataSheet:XML = XML(new _buttonXML());
 var buttonSpriteSheet:Bitmap = new _buttonImage();
 _blitSprite = new BlitSprite(buttonSpriteSheet, dataSheet, 30); 
+addChild(_blitSprite);
 
 
 
