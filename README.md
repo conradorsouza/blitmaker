@@ -27,7 +27,9 @@ blitmaker
 
 
 BlitMaker
+BlitMaker project works with Sparrow/Starling XML for loading positions of the sprite sheet.
 
+This xml can be generated with Flash CS6, TexturePacker, and many other texture sheet makers. 
 Compile src/BlitMaker.as to see project running.
 
 
