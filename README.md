@@ -28,7 +28,7 @@ blitmaker
 
 BlitMaker
 
-Compile Main.as to see project running.
+Compile src/BlitMaker.as to see project running.
 
 
 =========
