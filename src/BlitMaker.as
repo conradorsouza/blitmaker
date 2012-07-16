@@ -21,41 +21,53 @@
  * 
  */
 
-package blitmaker.loader 
+package 
 {
-	import blitmaker.events.SpriteDataSheetLoaderEvents;
+	import blitmaker.sprite.BlitSprite;
+	
+	import flash.display.Bitmap;
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
+	
+	
 	/**
 	 * ...
 	 * @author Conrado Souza
 	 */
-	public class SpriteDataSheetLoader extends EventDispatcher
+	public class BlitMaker extends Sprite 
 	{
 		
-		public function SpriteDataSheetLoader() 
-		{
-			
-		}
+		[Embed(source="../bin/buildings.png")]
+		private const _buildingsImage:Class;
 		
-		public function load(path:String):void
-		{
-			var request:URLRequest = new URLRequest();
-				request.url = path;
-				
-			var spriteLoader:URLLoader = new URLLoader();
-				spriteLoader.addEventListener(Event.COMPLETE, spriteLoaded);
-				spriteLoader.load(request);
-		}
-		
-		private function spriteLoaded(e:Event):void 
-		{
-			var data:XML = XML(e.currentTarget.data);
-			
-			dispatchEvent(new SpriteDataSheetLoaderEvents(SpriteDataSheetLoaderEvents.DATA_LOADED, data));
-		}
-	}
+		[Embed(source="../bin/buildings.xml", mimeType="application/octet-stream")]
+		private const _buildingsXML:Class;
 
+		private var _blitBuildingSprite:BlitSprite;
+	
+		public function BlitMaker() 
+		{
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(e:Event = null):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			var dataSheetBuildings:XML = XML(new _buildingsXML());
+			var buttonSpriteSheetBuildings:Bitmap = new _buildingsImage();
+			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, dataSheetBuildings, 120); 
+			
+			addChild(_blitBuildingSprite);
+
+		}
+		
+	}
+	
 }

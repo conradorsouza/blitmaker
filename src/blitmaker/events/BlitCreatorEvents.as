@@ -21,41 +21,37 @@
  * 
  */
 
-package blitmaker.loader 
+package blitmaker.events 
 {
-	import blitmaker.events.SpriteDataSheetLoaderEvents;
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
+	
 	/**
 	 * ...
 	 * @author Conrado Souza
 	 */
-	public class SpriteDataSheetLoader extends EventDispatcher
+	public class BlitCreatorEvents extends Event 
 	{
 		
-		public function SpriteDataSheetLoader() 
-		{
+		public static const SPRITE_LOADED:String = "spriteLoaded";
+		public static const SPRITEDATA_LOADED:String = "spriteDataLoaded";
+		static public const BLIT_LOADED:String = "blitLoaded";
+		
+		public function BlitCreatorEvents(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
+		{ 
+			super(type, bubbles, cancelable);
 			
+		} 
+		
+		public override function clone():Event 
+		{ 
+			return new BlitCreatorEvents(type, bubbles, cancelable);
+		} 
+		
+		public override function toString():String 
+		{ 
+			return formatToString("BlitMakerEvents", "type", "bubbles", "cancelable", "eventPhase"); 
 		}
 		
-		public function load(path:String):void
-		{
-			var request:URLRequest = new URLRequest();
-				request.url = path;
-				
-			var spriteLoader:URLLoader = new URLLoader();
-				spriteLoader.addEventListener(Event.COMPLETE, spriteLoaded);
-				spriteLoader.load(request);
-		}
-		
-		private function spriteLoaded(e:Event):void 
-		{
-			var data:XML = XML(e.currentTarget.data);
-			
-			dispatchEvent(new SpriteDataSheetLoaderEvents(SpriteDataSheetLoaderEvents.DATA_LOADED, data));
-		}
 	}
-
+	
 }

@@ -1,3 +1,26 @@
+/**
+ * 
+ * Copyright (c) 2012 Conrado Souza - conradorsouza@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person 
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, 
+ * publish, distribute, sublicense, and/or sell copies of the Software, 
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+ * OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER 
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ */
+
 package blitmaker.sprite 
 {
 	import flash.display.Bitmap;
@@ -17,29 +40,41 @@ package blitmaker.sprite
 		private var _spriteSheet:Bitmap;
 		private var _currentFrame:uint;
 		
-		
 		private var _timer:Timer;
 		private var _frameDirection:int = 1;
 		
-		public function BlitSprite(spriteSheet:Bitmap, dataFile:SpriteSheetData, fps:uint = 24) 
+		
+		/**
+		 * 
+		 * @param spriteSheet:Bitmap
+		 * Bitmap source from the animation sheet
+		 * 
+		 * @param dataFile:XML
+		 * XML File that contains animation data
+		 * 
+		 * @param fps:uint
+		 * Animation FPS Value
+		 */		
+		public function BlitSprite(spriteSheet:Bitmap, dataFile:XML, fps:uint = 24) 
 		{
 			this._fps = fps;
-			this._dataFile = dataFile;
-			this._spriteSheet = spriteSheet;
-			this._totalFrames = dataFile.frame.length;
+			this._dataFile = new SpriteSheetData(dataFile);
+			this._spriteSheet = new Bitmap(spriteSheet.bitmapData);
+			this._totalFrames = this._dataFile.frame.length;
 			this._currentFrame = 0;
-
+			
 			this._timer = new Timer(1000/this._fps, 0);
 			this._timer.addEventListener(TimerEvent.TIMER, changeFrame);
 			this._timer.start();			
-			
-			drawFrame(this._currentFrame);
 
-			this.addChild( spriteSheet );
+			this.addChild( this._spriteSheet );
+			drawFrame(this._currentFrame);
 		}
 		
-		private function changeFrame(e:TimerEvent):void 
+		private function changeFrame(e:TimerEvent = null):void 
 		{
+			drawFrame(this._currentFrame);
+
 			if (this._currentFrame < this._totalFrames-1)
 			{
 				this._currentFrame += this._frameDirection;
@@ -49,34 +84,87 @@ package blitmaker.sprite
 				this._currentFrame = 0;
 			}
 			
-			drawFrame(this._currentFrame);			
+		}
+		
+		/**
+		 * @param frameNumber:uint Destination frame number
+		 */		
+		public function gotoAndStop(frameNumber:uint):void
+		{
+			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
+			
+			if(this._timer.running)
+				this._timer.stop();
+			
+			changeFrame();
+		}
+		
+		/**
+		 * @param frameNumber:uint Destination frame number
+		 */		
+		public function gotoAndPlay(frameNumber:uint):void
+		{
+			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
+			
+			if(!this._timer.running)
+				this._timer.start();
+				
+			changeFrame();
 		}
 		
 		private function drawFrame(dataIndex:uint):void 
 		{
 			var frame:Frame = this._dataFile.frame[dataIndex];
+				frame.execFrameFunction();
+				
+			this.width = frame.width;
+			this.height = frame.height;
+			
 			this._spriteSheet.scrollRect = frame.rect;
 		}
 		
+		/**
+		 * @param frame:uint Desired frame to dispatch a custom funciton
+		 * @param method:Function Function that is going to be executed when it reaches the desired frame
+		 */		
+		public function addFrameScript(frame:uint, method:Function):void
+		{
+			this._dataFile.frame[frame].frameFunction = method;
+		}
+		
+		/**
+		 *@exampleText Stops animation 
+		 */		
 		public function stop():void
 		{
 			this._timer.stop();
 		}
 		
+		/**
+		 *@exampleText Starts animation 
+		 */		
 		public function play():void
 		{
 			this._timer.start();
 		}
 		
+		/**
+		 * @return Return the current FPS value
+		 */		
 		public function get fps():uint { return this._fps; }
 		
+		/**
+		 * @param value:uint Set a new FPS value for the animation
+		 */		
 		public function set fps(value:uint):void 
 		{
 			this._fps = value;
-			_timer.delay = 1000 / value;
-		
+			this._timer.delay = 1000 / value;
 		}
 		
+		/**
+		 * @return Reads the current frame index
+		 */		
 		public function get currentFrame():uint { return this._currentFrame; }
 		
 	}

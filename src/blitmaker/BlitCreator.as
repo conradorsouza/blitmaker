@@ -1,6 +1,29 @@
+/**
+ * 
+ * Copyright (c) 2012 Conrado Souza - conradorsouza@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person 
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, 
+ * publish, distribute, sublicense, and/or sell copies of the Software, 
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+ * OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER 
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ */
+
 package blitmaker 
 {
-	import blitmaker.events.BlitMakerEvents;
+	import blitmaker.events.BlitCreatorEvents;
 	import blitmaker.events.SpriteDataSheetLoaderEvents;
 	import blitmaker.events.SpriteLoaderEvents;
 	import blitmaker.loader.SpriteDataSheetLoader;
@@ -13,14 +36,14 @@ package blitmaker
 	 * ...
 	 * @author Conrado Souza 
 	 */
-	public class BlitMaker extends EventDispatcher
+	public class BlitCreator extends EventDispatcher
 	{
 		private var _fps:uint = 24;
 		private var _blitSprite:BlitSprite;
 		private var _spriteSheet:Bitmap;
-		private var _spriteSheetData:SpriteSheetData;
+		private var _spriteSheetData:XML;
 		
-		public function BlitMaker(fps:uint) 
+		public function BlitCreator(fps:uint) 
 		{
 			this._fps = fps;
 		}
@@ -62,8 +85,8 @@ package blitmaker
 		
 		private function buildSpriteDataSheet(dataSheet:XML):void
 		{
-			_spriteSheetData = new SpriteSheetData(dataSheet)
-			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITEDATA_LOADED));
+			_spriteSheetData = dataSheet;
+			this.dispatchEvent(new BlitCreatorEvents(BlitCreatorEvents.SPRITEDATA_LOADED));
 			
 			buildContent();
 		}
@@ -71,7 +94,7 @@ package blitmaker
 		private function buildSpriteSheet(bitmap:Bitmap):void
 		{
 			_spriteSheet = bitmap;
-			this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.SPRITE_LOADED));
+			this.dispatchEvent(new BlitCreatorEvents(BlitCreatorEvents.SPRITE_LOADED));
 			
 			buildContent();
 		}
@@ -82,7 +105,7 @@ package blitmaker
 			{
 				this._blitSprite = new BlitSprite(_spriteSheet, _spriteSheetData);
 				this._blitSprite.fps = this._fps;
-				this.dispatchEvent(new BlitMakerEvents(BlitMakerEvents.BLIT_LOADED));
+				this.dispatchEvent(new BlitCreatorEvents(BlitCreatorEvents.BLIT_LOADED));
 			}
 			
 		}
