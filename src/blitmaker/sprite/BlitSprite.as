@@ -36,7 +36,7 @@ package blitmaker.sprite
 	{
 		private var _fps:uint = 24;
 		private var _dataFile:SpriteSheetData;
-		private var _totalFrames:int;
+		private var _totalFrames:uint;
 		private var _spriteSheet:Bitmap;
 		private var _currentFrame:uint;
 		
@@ -166,6 +166,8 @@ package blitmaker.sprite
 		 * @return Reads the current frame index
 		 */		
 		public function get currentFrame():uint { return this._currentFrame; }
+		
+		public function get totalFrames():uint { return this._totalFrames; }
 		
 	}
 
