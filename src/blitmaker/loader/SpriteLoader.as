@@ -39,6 +39,9 @@ package blitmaker.loader
 	public class SpriteLoader extends EventDispatcher
 	{
 		
+		private var _request:URLRequest;
+		private var _spriteLoader:Loader;
+		
 		public function SpriteLoader() 
 		{
 			
@@ -46,18 +49,26 @@ package blitmaker.loader
 		
 		public function load(path:String):void
 		{
-			var request:URLRequest = new URLRequest();
-				request.url = path;
-				
-			var spriteLoader:Loader = new Loader();
-				spriteLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, spriteLoaded);
-				spriteLoader.load(request);
+			this._request = new URLRequest();
+			this._request.url = path;
+			
+			this._spriteLoader = new Loader();
+			this._spriteLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, spriteLoaded);
+			this._spriteLoader.load( this._request );
 		}
 		
 		private function spriteLoaded(e:Event):void 
 		{
-			var bitmap:Bitmap = e.target.content as Bitmap;			
-			dispatchEvent(new SpriteLoaderEvents(SpriteLoaderEvents.SPRITE_LOADED, bitmap));
+			dispatchEvent(new SpriteLoaderEvents(SpriteLoaderEvents.SPRITE_LOADED, e.target.content as Bitmap));
+		}
+		
+		private function dispose():void
+		{
+			this._spriteLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, spriteLoaded);
+			this._spriteLoader.unloadAndStop();
+			this._spriteLoader = null;
+			
+			this._request = null;
 		}
 		
 	}

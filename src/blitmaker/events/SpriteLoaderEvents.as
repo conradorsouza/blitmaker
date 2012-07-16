@@ -38,7 +38,7 @@ package blitmaker.events
 		
 		public function SpriteLoaderEvents(type:String, bitmap:Bitmap=null, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{ 
-			_bitmap = bitmap;
+			this._bitmap = bitmap;
 			super(type, bubbles, cancelable);			
 		} 
 		

@@ -34,27 +34,38 @@ package blitmaker.loader
 	 */
 	public class SpriteDataSheetLoader extends EventDispatcher
 	{
+		private var _request:URLRequest;
+		private var _spriteLoader:URLLoader;
 		
 		public function SpriteDataSheetLoader() 
 		{
 			
 		}
 		
-		public function load(path:String):void
+		public function load( path:String ):void
 		{
-			var request:URLRequest = new URLRequest();
-				request.url = path;
-				
-			var spriteLoader:URLLoader = new URLLoader();
-				spriteLoader.addEventListener(Event.COMPLETE, spriteLoaded);
-				spriteLoader.load(request);
+			this._request = new URLRequest();
+			this._request.url = path;
+			
+			this._spriteLoader = new URLLoader();
+			this._spriteLoader.addEventListener(Event.COMPLETE, spriteLoaded);
+			this._spriteLoader.load( this._request );
 		}
 		
 		private function spriteLoaded(e:Event):void 
 		{
-			var data:XML = XML(e.currentTarget.data);
+			dispatchEvent( new SpriteDataSheetLoaderEvents(SpriteDataSheetLoaderEvents.DATA_LOADED, XML(e.currentTarget.data) ) );
 			
-			dispatchEvent(new SpriteDataSheetLoaderEvents(SpriteDataSheetLoaderEvents.DATA_LOADED, data));
+			this.dispose();
+		}
+		
+		private function dispose():void
+		{
+			this._spriteLoader.removeEventListener(Event.COMPLETE, spriteLoaded);
+			this._spriteLoader.close();
+			this._spriteLoader = null;
+			
+			this._request = null;
 		}
 	}
 
