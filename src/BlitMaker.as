@@ -62,10 +62,11 @@ package
 			
 			var dataSheetBuildings:XML = XML(new _buildingsXML());
 			var buttonSpriteSheetBuildings:Bitmap = new _buildingsImage();
-			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, dataSheetBuildings, 120); 
+			
+			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, dataSheetBuildings, 30); 
 			
 			addChild(_blitBuildingSprite);
-
+			
 		}
 		
 	}
