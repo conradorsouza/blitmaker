@@ -37,7 +37,7 @@ package blitmaker.sprite
 		private var _index:uint;
 		private var _width:Number;
 		private var _height:Number;
-		private var _frameID:String;
+		private var _label:String;
 		private var _frameFunction:Function;
 		
 		public function Frame() 
@@ -53,8 +53,8 @@ package blitmaker.sprite
 		
 		public function get index():uint { return this._index; }
 		
-		public function get frameID():String { return this._frameID; }
-		
+		public function get label():String { return this._label; }
+			
 		public function get x():Number { return this._x; }
 		
 		public function get y():Number { return this._y; }
@@ -75,11 +75,12 @@ package blitmaker.sprite
 		
 		public function set height(value:Number):void { this._height = value; }
 				
-		public function set frameID(value:String):void { this._frameID = value; }
-
 		public function set rect(value:Rectangle):void { this._rect = value; }
 		
 		public function set frameFunction(value:Function):void { this._frameFunction = value; }
+		
+		
+		public function set label(value:String):void { this._label = value; }
 	}
 
 }

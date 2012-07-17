@@ -24,6 +24,7 @@
 package 
 {
 	import blitmaker.sprite.BlitSprite;
+	import flash.events.MouseEvent;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -59,16 +60,16 @@ package
 			
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			
+
 			var dataSheetBuildings:XML = XML(new _buildingsXML());
 			var buttonSpriteSheetBuildings:Bitmap = new _buildingsImage();
 			
 			_blitBuildingSprite = new BlitSprite(buttonSpriteSheetBuildings, dataSheetBuildings, 30); 
-			
+
 			addChild(_blitBuildingSprite);
 			
 		}
-		
+
 	}
 	
 }

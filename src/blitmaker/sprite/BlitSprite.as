@@ -34,15 +34,15 @@ package blitmaker.sprite
 	 */
 	public class BlitSprite extends Sprite 
 	{
-		private var _fps:uint = 24;
-		private var _dataFile:SpriteSheetData;
-		private var _totalFrames:uint;
-		private var _spriteSheet:Bitmap;
-		private var _currentFrame:uint;
-		
+
 		private var _timer:Timer;
+		private var _dataFile:SpriteSheetData;
+		private var _spriteSheet:Bitmap;
+
+		private var _fps:uint = 24;
+		private var _totalFrames:uint;
+		private var _currentFrame:uint;
 		private var _frameDirection:int = 1;
-		
 		
 		/**
 		 * 
@@ -83,28 +83,35 @@ package blitmaker.sprite
 			{
 				this._currentFrame = 0;
 			}
-			
 		}
 		
 		/**
-		 * @param frameNumber:uint Destination frame number
+		 * @param frameNumber:Object Destination frame number. Can be a uint or a String
 		 */		
-		public function gotoAndStop(frameNumber:uint):void
+		public function gotoAndStop(frame:Object):void
 		{
-			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
-			
 			if(this._timer.running)
 				this._timer.stop();
+				
+			var desiredFrameIndex:uint 
+			var totalFrames:uint = this._totalFrames-1
 			
+			desiredFrameIndex = this._dataFile.getFrame(frame).index
+			this._currentFrame = desiredFrameIndex >= totalFrames ? 0 : desiredFrameIndex;
+						
 			changeFrame();
 		}
 		
 		/**
-		 * @param frameNumber:uint Destination frame number
+		 * @param frameNumber:Object Destination frame number. Can be a uint or a String
 		 */		
-		public function gotoAndPlay(frameNumber:uint):void
+		public function gotoAndPlay(frame:Object):void
 		{
-			this._currentFrame = frameNumber >= this._totalFrames-1 ? 0 : frameNumber;
+			var desiredFrameIndex:uint
+			var totalFrames:uint = this._totalFrames-1
+			
+			desiredFrameIndex = this._dataFile.getFrame(frame).index
+			this._currentFrame = desiredFrameIndex >= totalFrames ? 0 : desiredFrameIndex;
 			
 			if(!this._timer.running)
 				this._timer.start();
@@ -112,24 +119,25 @@ package blitmaker.sprite
 			changeFrame();
 		}
 		
-		private function drawFrame(dataIndex:uint):void 
+		private function drawFrame(dataIndex:Object):void 
 		{
-			var frame:Frame = this._dataFile.frame[dataIndex];
-				frame.execFrameFunction();
+			var frame:Frame	
+				frame = this._dataFile.getFrame(dataIndex);
+						
+			frame.execFrameFunction();
 				
 			this.width = frame.width;
 			this.height = frame.height;
-			
 			this._spriteSheet.scrollRect = frame.rect;
 		}
 		
 		/**
-		 * @param frame:uint Desired frame to dispatch a custom funciton
+		 * @param frame:Object Desired frame to dispatch a custom function. Can be a uint or a String
 		 * @param method:Function Function that is going to be executed when it reaches the desired frame
 		 */		
-		public function addFrameScript(frame:uint, method:Function):void
+		public function addFrameScript(frame:Object, method:Function):void
 		{
-			this._dataFile.frame[frame].frameFunction = method;
+			this._dataFile.getFrame(frame).frameFunction = method;
 		}
 		
 		/**

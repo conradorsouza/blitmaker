@@ -47,16 +47,51 @@ package blitmaker.sprite
 				currentNode = this._data.SubTexture[i];
 				
 				var frame:Frame = new Frame();
+					frame.index = i;
 					frame.x = currentNode.@x;
 					frame.y = currentNode.@y;
-					frame.index = i;
+					frame.label = currentNode.@name;
 					frame.width = currentNode.@width;
 					frame.height = currentNode.@height;
-					frame.frameID = currentNode.@name;
 					frame.rect = new Rectangle( frame.x, frame.y, frame.width, frame.height );
 				
 				this._frame.push(frame);
 			}
+		}
+		
+		public function getFrame(dataIndex:Object):Frame 
+		{
+			var frame:Frame;
+			
+			if (dataIndex is uint)
+			{
+				frame = this.frame[uint(dataIndex)]
+				
+			}
+			else if ( dataIndex is String )
+			{
+				
+				for (var i:int = 0; i < this._frame.length; i++) 
+				{
+					if (this._frame[i].label == String(dataIndex))
+					{
+						frame = this._frame[i];
+						break;
+					}
+					else
+					{
+						frame = this._frame[0];
+					}
+				}
+			}
+			else
+			{
+				
+				frame = this._frame[0];
+			}
+			
+			
+			return frame;
 		}
 		
 		public function get frame():Vector.<Frame> { return this._frame; }
