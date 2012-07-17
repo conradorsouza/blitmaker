@@ -26,6 +26,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 BlitMaker
 BlitMaker project works with Sparrow/Starling XML for loading positions of the sprite sheet.
 
+BlitMaker is a actionscript3 framework that was created to make blitting easy.
+
 This xml can be generated with Flash CS6, TexturePacker, and many other texture sheet makers. 
 Compile src/BlitMaker.as to see project running.
 
@@ -33,17 +35,17 @@ BlitSprite can support the following functionalities(very similar to a MovieClip
 
 Frames index starts at 0.
 
-Methods:
-gotoAndPlay: go to a frame and make animation continue from it. Working with frame numbers and labels
-gotoAndStop: go to a frame and stops animation on it. Working with frame numbers and labels
-addFrameScript: add a function to a frame. Working with frame numbers and labels
-play: stats animation instantly
-stop: stops animation instantly
-
-Getters and Setters
-totalFrames: read-only. Read the total number of frames.
-currentFrame: read-only. Reads the current frame index.
-fps: read-write. Read or write current fps value, it changes the animation speed on runtime.
+Methods:<br />
+gotoAndPlay: go to a frame and make animation continue from it. Working with frame numbers and labels<br />
+gotoAndStop: go to a frame and stops animation on it. Working with frame numbers and labels<br />
+addFrameScript: add a function to a frame. Working with frame numbers and labels<br />
+play: stats animation instantly<br />
+stop: stops animation instantly<br />
+<br />
+Getters and Setters<br />
+totalFrames: read-only. Read the total number of frames.<br />
+currentFrame: read-only. Reads the current frame index.<br />
+fps: read-write. Read or write current fps value, it changes the animation speed on runtime.<br />
 
 
 =========
